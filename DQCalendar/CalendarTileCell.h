@@ -10,5 +10,7 @@
 
 @interface CalendarTileCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
+@property (nonatomic) BOOL isToday;
+@property (nonatomic) BOOL isOffDay;
 
 @end

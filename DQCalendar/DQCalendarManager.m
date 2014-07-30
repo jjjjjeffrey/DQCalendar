@@ -134,15 +134,12 @@
 {
     CalendarTileCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
     
-    if (indexPath.row % 6 == 0 || indexPath.row % 7 == 0) {
-        cell.dateLabel.textColor = [UIColor lightGrayColor];
-    } else {
-        cell.dateLabel.textColor = [UIColor blackColor];
-    }
-    
     NSDate *date = [self dateAtIndexPath:indexPath];
     NSString *dayString = [date dayComponents] == 0 ? @"" : [NSString stringWithFormat:@"%ld", [date dayComponents]];
     cell.dateLabel.text = dayString;
+    
+    cell.isToday = [date isToday];
+    cell.isOffDay = [date weekDay] == 6 || [date weekDay] == 7;
     
     return cell;
 }
