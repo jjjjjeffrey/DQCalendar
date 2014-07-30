@@ -33,13 +33,35 @@
     [self.layer addSublayer:separatorLayer];
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
+- (void)setIsOffDay:(BOOL)isOffDay
+{
+    _isOffDay = isOffDay;
+    
+    [self reloadDateLabel];
+}
+
+- (void)setIsToday:(BOOL)isToday
+{
+    _isToday = isToday;
+    
+    [self reloadDateLabel];
+}
+
+- (void)reloadDateLabel
+{
+    if (self.isToday) {
+        self.dateLabel.textColor = [UIColor redColor];
+    } else if (self.isOffDay) {
+        self.dateLabel.textColor = [UIColor lightGrayColor];
+    } else {
+        self.dateLabel.textColor = [UIColor blackColor];
+    }
+}
+
+
 - (void)drawRect:(CGRect)rect
 {
-    // Drawing code
+    
 }
-*/
 
 @end
