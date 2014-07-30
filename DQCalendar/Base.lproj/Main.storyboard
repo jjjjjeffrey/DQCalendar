@@ -64,7 +64,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="beB-MM-v8W" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="513" y="158"/>
+            <point key="canvasLocation" x="225" y="158"/>
         </scene>
         <!--Calendar View Controller-->
         <scene sceneID="jLC-eE-Mte">
@@ -197,7 +197,7 @@
                     </connections>
                 </customObject>
             </objects>
-            <point key="canvasLocation" x="1218" y="96"/>
+            <point key="canvasLocation" x="930" y="88"/>
         </scene>
         <!--Table View Controller-->
         <scene sceneID="XXA-pp-was">
@@ -244,7 +244,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lED-St-O8K" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1218" y="548"/>
+            <point key="canvasLocation" x="930" y="540"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
