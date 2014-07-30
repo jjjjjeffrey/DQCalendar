@@ -16,7 +16,6 @@
 @property (nonatomic) NSInteger totalMonths;
 @property (nonatomic, strong) NSDate *currentMonthDate;
 @property (nonatomic) NSInteger currentSectionOfMonth;
-@property (nonatomic) NSInteger currentMonth;
 
 - (void)resetAnimationDidStart;
 - (void)resetAnimationDidStop;

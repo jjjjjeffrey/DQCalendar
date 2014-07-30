@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>0BC13E8D-F1F8-4900-B8D6-F49B208B0FE8</string>
+	<key>IDESourceControlProjectName</key>
+	<string>DQCalendar</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>66AE6DC3-DCD5-4C9F-AA81-71FF82D9F2F4</key>
+		<string>https://github.com/jjjjjeffrey/DQCalendar.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>DQCalendar.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>66AE6DC3-DCD5-4C9F-AA81-71FF82D9F2F4</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/jjjjjeffrey/DQCalendar.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>66AE6DC3-DCD5-4C9F-AA81-71FF82D9F2F4</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>66AE6DC3-DCD5-4C9F-AA81-71FF82D9F2F4</string>
+			<key>IDESourceControlWCCName</key>
+			<string>DQCalendar</string>
+		</dict>
+	</array>
+</dict>
+</plist>

@@ -35,10 +35,7 @@
 {
     if ([object isKindOfClass:[DQCalendarManager class]]) {
         if ([keyPath isEqualToString:@"rowOfPage"]) {
-            if (self.calendarVC.calendarManager.rowOfPage != self.lastSectionOfPage) {
-                self.lastSectionOfPage = self.calendarVC.calendarManager.rowOfPage;
-                [self performAnimation];
-            }
+            [self performAnimation];
         }
         if ([keyPath isEqualToString:@"currentMonthDate"]) {
             NSInteger year = [self.calendarVC.calendarManager.currentMonthDate yearComponents];
@@ -51,17 +48,20 @@
 - (void)performAnimation
 {
     
+    id toValue = 0;
+    if (self.calendarVC.calendarManager.rowOfPage == 4) {
+        toValue = @(260);
+    } else if (self.calendarVC.calendarManager.rowOfPage == 5) {
+        toValue = @(320);
+    } else if (self.calendarVC.calendarManager.rowOfPage == 6) {
+        toValue = @(380);
+    }
+    
     POPBasicAnimation *animation = [POPBasicAnimation animationWithPropertyNamed:kPOPLayoutConstraintConstant];
-    animation.toValue = self.lastSectionOfPage == 5 ? @(320) : @(380);
+    animation.toValue = toValue;
     animation.duration = 0.3;
     animation.delegate = self;
     [self.CalendarHeightConstraint pop_addAnimation:animation forKey:nil];
-    
-    
-    
-//    [UIView animateWithDuration:1 animations:^{
-//        self.CalendarHeightConstraint.constant = self.lastSectionOfPage == 5 ? 320 : 380;
-//    } completion:^(BOOL finished){}];
 }
 
 - (void)viewDidLoad
@@ -96,13 +96,11 @@
 #pragma mark - POPAnimationDelegate
 - (void)pop_animationDidStart:(POPAnimation *)anim
 {
-    [self.calendarVC.calendarManager resetAnimationDidStart];
+
 }
 
 - (void)pop_animationDidStop:(POPAnimation *)anim finished:(BOOL)finished
 {
-    
-    [self.calendarVC.calendarManager resetAnimationDidStop];
     
 }
 
