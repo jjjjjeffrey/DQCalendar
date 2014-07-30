@@ -28,6 +28,7 @@
 {
     _beginDate = beginDate;
     
+    self.currentMonthDate = _beginDate;
     self.currentMonth = [_beginDate monthComponents];
     self.numberOfRowsInCurrentSection = [self numberOfRowsInSection:0];
 }
@@ -103,9 +104,7 @@
 
 - (BOOL)isLastSection:(NSInteger)section
 {
-    NSInteger lastMonth = [self.endDate monthComponents];
-    NSInteger sectionMonth = [self.beginDate monthComponents]+section;
-    return lastMonth == sectionMonth;
+    return section+1 == [self totalMonths];
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -173,6 +172,9 @@
     self.currentOffset = scrollView.contentOffset;
     self.currentSection = indexPath.section;
     
+    
+    
+    
     [self scrollReset];
 }
 
@@ -185,12 +187,25 @@
 {
     if (velocity.y > 0) {
         *targetContentOffset = CGPointMake(targetContentOffset->x, self.currentOffset.y+self.numberOfRowsInCurrentSection*60);
+        
+        NSDateComponents *offsetComponents = [[NSDateComponents alloc] init];
+        offsetComponents.month = 1;
+        if ([self.currentMonthDate compare:self.endDate] == NSOrderedAscending) {
+            self.currentMonthDate = [[NSDate gregorianCalendar] dateByAddingComponents:offsetComponents toDate:self.currentMonthDate options:0];
+        }
     } else {
         if ([self isLastSection:self.currentSection]) {
             *targetContentOffset = CGPointMake(targetContentOffset->x, self.currentOffset.y-self.numberOfRowsInCurrentSection*60);
         } else {
             *targetContentOffset = CGPointMake(targetContentOffset->x, self.currentOffset.y-self.numberOfRowsInLastSection*60);
         }
+        
+        if ([self.currentMonthDate compare:self.beginDate] == NSOrderedDescending) {
+            NSDateComponents *offsetComponents = [[NSDateComponents alloc] init];
+            offsetComponents.month = -1;
+            self.currentMonthDate = [[NSDate gregorianCalendar] dateByAddingComponents:offsetComponents toDate:self.currentMonthDate options:0];
+        }
+        
         
     }
 }

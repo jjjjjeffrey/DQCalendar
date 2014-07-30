@@ -144,6 +144,13 @@ const char * const JmoLocaleStoreKey = "jmo.locale";
     return comps.month;
 }
 
+- (NSInteger)yearComponents
+{
+    NSCalendar *calendar = [self.class gregorianCalendar];
+    NSDateComponents *comps = [calendar components: NSCalendarUnitYear fromDate:self];
+    return comps.year;
+}
+
 - (NSDate *)startingDate
 {
     NSDateComponents *components = [[NSDate gregorianCalendar] components:(NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay|NSCalendarUnitHour|NSCalendarUnitMinute|NSCalendarUnitSecond) fromDate:self];

@@ -40,8 +40,10 @@
                 [self performAnimation];
             }
         }
-        if ([keyPath isEqualToString:@"currentMonth"]) {
-            self.title = [NSString stringWithFormat:@"%ld月", self.calendarVC.calendarManager.currentMonth];
+        if ([keyPath isEqualToString:@"currentMonthDate"]) {
+            NSInteger year = [self.calendarVC.calendarManager.currentMonthDate yearComponents];
+            NSInteger month = [self.calendarVC.calendarManager.currentMonthDate monthComponents];
+            self.title = [NSString stringWithFormat:@"%ld年%ld月", year, month];
         }
     }
 }
@@ -77,16 +79,18 @@
     NSDate *fromDate = [[NSDate gregorianCalendar] dateFromComponents:components];
     components.year = 2015;
     components.month = 12;
-    components.day = 31;
+    components.day = 1;
     NSDate *toDate = [[NSDate gregorianCalendar] dateFromComponents:components];
     
     self.currentMonth = [fromDate monthComponents];
     self.calendarVC.calendarManager.beginDate = fromDate;
     self.calendarVC.calendarManager.endDate = toDate;
     [self.calendarVC.calendarManager addObserver:self forKeyPath:@"rowOfPage" options:NSKeyValueObservingOptionNew context:nil];
-    [self.calendarVC.calendarManager addObserver:self forKeyPath:@"currentMonth" options:NSKeyValueObservingOptionNew context:nil];
+    [self.calendarVC.calendarManager addObserver:self forKeyPath:@"currentMonthDate" options:NSKeyValueObservingOptionNew context:nil];
     
-    self.title = [NSString stringWithFormat:@"%ld月", self.calendarVC.calendarManager.currentMonth];
+    NSInteger year = [self.calendarVC.calendarManager.currentMonthDate yearComponents];
+    NSInteger month = [self.calendarVC.calendarManager.currentMonthDate monthComponents];
+    self.title = [NSString stringWithFormat:@"%ld年%ld月", year, month];
 }
 
 #pragma mark - POPAnimationDelegate

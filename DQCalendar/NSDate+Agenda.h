@@ -17,6 +17,7 @@
 - (NSInteger)dayComponents;
 - (NSInteger)quartComponents;
 - (NSInteger)monthComponents;
+- (NSInteger)yearComponents;
 
 + (NSCalendar *)gregorianCalendar;
 + (NSLocale *)locale;
