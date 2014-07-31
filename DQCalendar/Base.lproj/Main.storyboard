@@ -57,7 +57,13 @@
                             <constraint firstItem="dF6-X9-iia" firstAttribute="top" secondItem="8VI-Jz-Bob" secondAttribute="top" constant="64" id="Ubs-LB-k4u"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="sdd-gY-Jl8"/>
+                    <navigationItem key="navigationItem" id="sdd-gY-Jl8">
+                        <barButtonItem key="leftBarButtonItem" title="今天" id="iuF-5m-eug">
+                            <connections>
+                                <action selector="todayButtonClicked:" destination="tJO-7O-g1D" id="Haz-fG-Gdt"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="CalendarHeightConstraint" destination="c4T-2U-uIq" id="aKD-cg-lL8"/>
                     </connections>

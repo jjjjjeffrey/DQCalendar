@@ -186,4 +186,24 @@ const char * const JmoLocaleStoreKey = "jmo.locale";
     return months[index - 1];
 }
 
+- (BOOL)betweenDate:(NSDate *)beginDate andDate:(NSDate *)endDate
+{
+    NSComparisonResult cmpResult = [beginDate compare:endDate];
+    if (cmpResult == NSOrderedSame || cmpResult == NSOrderedDescending) {
+        return NO;
+    }
+    
+    cmpResult = [self compare:beginDate];
+    if (cmpResult == NSOrderedAscending) {
+        return NO;
+    }
+    
+    cmpResult = [self compare:endDate];
+    if (cmpResult == NSOrderedDescending) {
+        return NO;
+    }
+    
+    return YES;
+}
+
 @end

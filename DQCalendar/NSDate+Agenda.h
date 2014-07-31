@@ -34,4 +34,6 @@
 + (NSArray *)weekdaySymbols;
 + (NSString *)monthSymbolAtIndex:(NSInteger)index;
 
+- (BOOL)betweenDate:(NSDate *)beginDate andDate:(NSDate *)endDate;
+
 @end
