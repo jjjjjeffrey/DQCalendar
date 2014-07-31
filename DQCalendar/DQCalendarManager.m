@@ -85,6 +85,23 @@
     return dateToRetuen;
 }
 
+- (NSIndexPath *)indexPathForDate:(NSDate *)date
+{
+    BOOL available = [date betweenDate:_beginDate andDate:_endDate];
+    if (!available) {
+        return nil;
+    }
+    
+    NSInteger monthNumer = [NSDate numberOfMonthFromDate:_beginDate toDate:date];
+    NSInteger section = monthNumer - 1;
+    
+    NSInteger firstWeekdayInSection = [self firstWeekdayInSection:section];
+    NSInteger itemOffset = firstWeekdayInSection == 7 ? 0 : firstWeekdayInSection;
+    NSInteger item = itemOffset + [date dayComponents] - 1;
+    
+    return [NSIndexPath indexPathForItem:item inSection:section];
+}
+
 - (NSInteger)numberOfRowsInSection:(NSInteger)section
 {
     NSInteger firstWeekdayInSection = [self firstWeekdayInSection:section];
@@ -105,6 +122,37 @@
 - (BOOL)isLastSection:(NSInteger)section
 {
     return section+1 == [self totalMonths];
+}
+
+- (void)scrollToDate:(NSDate *)toDate animated:(BOOL)animated
+{
+    BOOL available = [toDate betweenDate:_beginDate andDate:_endDate];
+    if (!available) {
+        return;
+    }
+    
+    NSDateComponents *components = [[NSDate gregorianCalendar] components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:toDate];
+    NSDate *clearDate = [[NSDate gregorianCalendar] dateFromComponents:components];
+    
+    NSIndexPath *indexPath = [self indexPathForDate:clearDate];
+    self.currentSection = indexPath.section;
+    self.currentMonthDate = clearDate;
+    self.currentSelectedDate = clearDate;
+    self.currentOffset = [self contentOffsetForSection:indexPath.section];
+    self.rowOfPage = [self numberOfRowsInSection:self.currentSection];
+    [self reloadNumberOfRowsData];
+    
+    NSIndexPath *scrollToIndexPath = [NSIndexPath indexPathForItem:0 inSection:indexPath.section];
+    [self.collectionView scrollToItemAtIndexPath:scrollToIndexPath atScrollPosition:UICollectionViewScrollPositionTop animated:animated];
+}
+
+- (CGPoint)contentOffsetForSection:(NSInteger)section
+{
+    CGFloat offSetY = 0.0;
+    for (int i = 0; i < section; i++) {
+        offSetY += [self numberOfRowsInSection:i] * 60;
+    }
+    return CGPointMake(0, offSetY);
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -152,21 +200,6 @@
     self.currentSelectedCell = (CalendarTileCell *)[collectionView cellForItemAtIndexPath:indexPath];
     self.currentSelectedCell.dateSelected = YES;
     self.currentSelectedDate = [self dateAtIndexPath:indexPath];
-    
-}
-
-- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView
-{
-    
-}
-
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
-{
-    
-}
-
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
-{
     
 }
 

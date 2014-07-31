@@ -17,4 +17,6 @@
 @property (nonatomic, strong) NSDate *currentMonthDate;
 @property (nonatomic, strong) NSDate *currentSelectedDate;
 
+- (void)scrollToDate:(NSDate *)toDate animated:(BOOL)animated;
+
 @end

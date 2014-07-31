@@ -64,6 +64,12 @@
     [self.CalendarHeightConstraint pop_addAnimation:animation forKey:nil];
 }
 
+- (IBAction)todayButtonClicked:(id)sender
+{
+    [self.calendarVC.calendarManager scrollToDate:[NSDate date] animated:YES];
+}
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
