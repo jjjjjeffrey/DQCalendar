@@ -26,7 +26,6 @@
 		7B9EB484198236E600281CA2 /* CalendarTileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B9EB483198236E600281CA2 /* CalendarTileCell.m */; };
 		7B9EB48A19861EF400281CA2 /* DQCalendarManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B9EB48919861EF400281CA2 /* DQCalendarManager.m */; };
 		7B9EB4901986487400281CA2 /* NSDate+Agenda.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B9EB48F1986487400281CA2 /* NSDate+Agenda.m */; };
-		7B9EB4931987511700281CA2 /* CalCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B9EB4921987511700281CA2 /* CalCollectionViewFlowLayout.m */; };
 		F7EA9DF9AF3F4FC8B64CC905 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CA6BF285E23E46BA92A32F2B /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -71,8 +70,6 @@
 		7B9EB48919861EF400281CA2 /* DQCalendarManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DQCalendarManager.m; sourceTree = "<group>"; };
 		7B9EB48E1986487400281CA2 /* NSDate+Agenda.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Agenda.h"; sourceTree = "<group>"; };
 		7B9EB48F1986487400281CA2 /* NSDate+Agenda.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Agenda.m"; sourceTree = "<group>"; };
-		7B9EB4911987511700281CA2 /* CalCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalCollectionViewFlowLayout.h; sourceTree = "<group>"; };
-		7B9EB4921987511700281CA2 /* CalCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalCollectionViewFlowLayout.m; sourceTree = "<group>"; };
 		CA6BF285E23E46BA92A32F2B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -143,8 +140,6 @@
 				7B9EB47A198220BD00281CA2 /* RootViewController.m */,
 				7B9EB47C198220D700281CA2 /* CalendarViewController.h */,
 				7B9EB47D198220D700281CA2 /* CalendarViewController.m */,
-				7B9EB4911987511700281CA2 /* CalCollectionViewFlowLayout.h */,
-				7B9EB4921987511700281CA2 /* CalCollectionViewFlowLayout.m */,
 				7B9EB48819861EF400281CA2 /* DQCalendarManager.h */,
 				7B9EB48919861EF400281CA2 /* DQCalendarManager.m */,
 				7B9EB47F198220E900281CA2 /* TableViewController.h */,
@@ -328,7 +323,6 @@
 				7B9EB484198236E600281CA2 /* CalendarTileCell.m in Sources */,
 				7B9EB481198220E900281CA2 /* TableViewController.m in Sources */,
 				7B9EB47B198220BD00281CA2 /* RootViewController.m in Sources */,
-				7B9EB4931987511700281CA2 /* CalCollectionViewFlowLayout.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
