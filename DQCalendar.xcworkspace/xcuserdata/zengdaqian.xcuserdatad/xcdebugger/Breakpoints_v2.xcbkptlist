@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DQCalendar/DQCalendarManager.m"
-            timestampString = "428466714.112469"
+            timestampString = "428469374.66286"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "160"
-            endingLineNumber = "160"
+            startingLineNumber = "168"
+            endingLineNumber = "168"
             landmarkName = "-numberOfSectionsInCollectionView:"
             landmarkType = "5">
          </BreakpointContent>
@@ -74,12 +74,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DQCalendar/DQCalendarManager.m"
-            timestampString = "428466714.112469"
+            timestampString = "428469374.66286"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "234"
-            endingLineNumber = "234"
-            landmarkName = "-scrollViewWillEndDragging:withVelocity:targetContentOffset:"
+            startingLineNumber = "242"
+            endingLineNumber = "242"
+            landmarkName = "-scrollToNextMonthWithTargetContentOffset:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -106,12 +106,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DQCalendar/DQCalendarManager.m"
-            timestampString = "428466714.112469"
+            timestampString = "428469374.66286"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "236"
-            endingLineNumber = "236"
-            landmarkName = "-scrollViewWillEndDragging:withVelocity:targetContentOffset:"
+            startingLineNumber = "244"
+            endingLineNumber = "244"
+            landmarkName = "-scrollToNextMonthWithTargetContentOffset:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -122,11 +122,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DQCalendar/DQCalendarManager.m"
-            timestampString = "428466714.112469"
+            timestampString = "428469374.66286"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "169"
-            endingLineNumber = "169"
+            startingLineNumber = "177"
+            endingLineNumber = "177"
             landmarkName = "-collectionView:numberOfItemsInSection:"
             landmarkType = "5">
          </BreakpointContent>
@@ -138,13 +138,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DQCalendar/DQCalendarManager.m"
-            timestampString = "428466714.112469"
+            timestampString = "428469374.66286"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "282"
-            endingLineNumber = "282"
-            landmarkName = "-reloadNumberOfRowsData"
-            landmarkType = "5">
+            startingLineNumber = "295"
+            endingLineNumber = "295">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -234,11 +232,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DQCalendar/DQCalendarManager.m"
-            timestampString = "428466714.112469"
+            timestampString = "428469374.66286"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "192"
-            endingLineNumber = "192"
+            startingLineNumber = "200"
+            endingLineNumber = "200"
             landmarkName = "-collectionView:cellForItemAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>

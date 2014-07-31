@@ -135,15 +135,23 @@
     NSDate *clearDate = [[NSDate gregorianCalendar] dateFromComponents:components];
     
     NSIndexPath *indexPath = [self indexPathForDate:clearDate];
-    self.currentSection = indexPath.section;
-    self.currentMonthDate = clearDate;
-    self.currentSelectedDate = clearDate;
-    self.currentOffset = [self contentOffsetForSection:indexPath.section];
-    self.rowOfPage = [self numberOfRowsInSection:self.currentSection];
-    [self reloadNumberOfRowsData];
     
-    NSIndexPath *scrollToIndexPath = [NSIndexPath indexPathForItem:0 inSection:indexPath.section];
-    [self.collectionView scrollToItemAtIndexPath:scrollToIndexPath atScrollPosition:UICollectionViewScrollPositionTop animated:animated];
+    if (self.currentSection == indexPath.section) {
+        self.currentSelectedCell.dateSelected = NO;
+        CalendarTileCell *cell = (CalendarTileCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+        cell.dateSelected = YES;
+        self.currentSelectedCell = cell;
+    } else {
+        self.currentSection = indexPath.section;
+        self.currentMonthDate = clearDate;
+        self.currentSelectedDate = clearDate;
+        self.currentOffset = [self contentOffsetForSection:indexPath.section];
+        self.rowOfPage = [self numberOfRowsInSection:self.currentSection];
+        [self reloadNumberOfRowsData];
+        
+        NSIndexPath *scrollToIndexPath = [NSIndexPath indexPathForItem:0 inSection:indexPath.section];
+        [self.collectionView scrollToItemAtIndexPath:scrollToIndexPath atScrollPosition:UICollectionViewScrollPositionTop animated:animated];
+    }
 }
 
 - (CGPoint)contentOffsetForSection:(NSInteger)section
@@ -241,6 +249,11 @@
 
 - (void)scrollToLastMonthWithTargetContentOffset:(inout CGPoint *)targetContentOffset
 {
+    if (self.currentSection == 0) {
+        *targetContentOffset = self.currentOffset;
+        return;
+    }
+    
     *targetContentOffset = CGPointMake(targetContentOffset->x, self.currentOffset.y-self.numberOfRowsInLastSection*60);
     
     if ([self.currentMonthDate compare:self.beginDate] == NSOrderedDescending) {
