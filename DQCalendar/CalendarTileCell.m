@@ -7,6 +7,7 @@
 //
 
 #import "CalendarTileCell.h"
+#import <POP.h>
 
 @interface CalendarTileCell ()
 
@@ -70,11 +71,22 @@
         self.SelectedCircleNormalView.hidden = NO;
         self.dateLabel.textColor = [UIColor whiteColor];
         self.dateLabel.font = [UIFont boldSystemFontOfSize:18];
+        [self addSelectedAnimation];
     } else {
         self.SelectedCircleNormalView.hidden = YES;
         self.dateLabel.font = [UIFont systemFontOfSize:17];
         [self reloadDateLabel];
     }
+}
+
+- (void)addSelectedAnimation
+{
+    POPSpringAnimation *toBig = [POPSpringAnimation animationWithPropertyNamed:kPOPViewSize];
+    toBig.springBounciness = 12;
+    toBig.springSpeed = 10;
+    toBig.fromValue = [NSValue valueWithCGSize:CGSizeMake(25, 25)];
+    toBig.toValue = [NSValue valueWithCGSize:CGSizeMake(30, 30)];
+    [self.SelectedCircleNormalView pop_addAnimation:toBig forKey:nil];
 }
 
 - (void)reloadDateLabel

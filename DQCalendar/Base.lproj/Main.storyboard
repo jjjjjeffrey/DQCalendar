@@ -58,14 +58,21 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="sdd-gY-Jl8">
-                        <barButtonItem key="leftBarButtonItem" title="今天" id="iuF-5m-eug">
+                        <barButtonItem key="leftBarButtonItem" title="今天" id="Vhb-XW-AML">
                             <connections>
-                                <action selector="todayButtonClicked:" destination="tJO-7O-g1D" id="Haz-fG-Gdt"/>
+                                <action selector="todayButtonClicked:" destination="tJO-7O-g1D" id="utT-cc-rL8"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="收起日历" id="13u-6J-M15">
+                            <connections>
+                                <action selector="changeCalendarShow:" destination="tJO-7O-g1D" id="jhu-bA-m49"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="CalendarHeightConstraint" destination="c4T-2U-uIq" id="aKD-cg-lL8"/>
+                        <outlet property="calendarTopAlignmentConstraint" destination="Ubs-LB-k4u" id="ibt-4n-bJ6"/>
+                        <outlet property="todayBarButton" destination="Vhb-XW-AML" id="4uV-9F-t9H"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="beB-MM-v8W" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -136,12 +143,12 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="4Rv-fU-pXd" firstAttribute="leading" secondItem="Y7G-QZ-8rW" secondAttribute="leading" id="8Mp-z6-97W"/>
-                                    <constraint firstAttribute="height" constant="20" id="hFE-jp-RpI"/>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="20" id="hFE-jp-RpI"/>
                                     <constraint firstAttribute="trailing" secondItem="JXR-E1-Zkr" secondAttribute="trailing" id="hqG-ab-GYQ"/>
                                     <constraint firstAttribute="centerX" secondItem="76f-Z8-y3f" secondAttribute="centerX" id="mSz-tt-3PT"/>
                                 </constraints>
                             </view>
-                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="lgP-iw-5R6">
+                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="lgP-iw-5R6">
                                 <rect key="frame" x="0.0" y="20" width="320" height="300"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -159,20 +166,20 @@
                                             <rect key="frame" x="0.0" y="0.0" width="44" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SelectedCircleNormal" translatesAutoresizingMaskIntoConstraints="NO" id="S7c-14-uEP" userLabel="Selected Normal">
+                                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="SelectedCircleNormal" translatesAutoresizingMaskIntoConstraints="NO" id="S7c-14-uEP" userLabel="Selected Normal">
                                                     <rect key="frame" x="7" y="10" width="30" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="30" id="QSd-GE-oiH"/>
-                                                        <constraint firstAttribute="width" constant="30" id="RXj-As-Plj"/>
+                                                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="30" id="QSd-GE-oiH"/>
+                                                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="30" id="RXj-As-Plj"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="28" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F1J-h7-L9G">
-                                                    <rect key="frame" x="12" y="14" width="21" height="21"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="28" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F1J-h7-L9G">
+                                                    <rect key="frame" x="12" y="14" width="20" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="21" id="UHY-Hx-csS"/>
-                                                        <constraint firstAttribute="width" constant="21" id="VZj-2R-Te3"/>
+                                                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="21" id="UHY-Hx-csS"/>
+                                                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="21" id="VZj-2R-Te3"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -183,7 +190,7 @@
                                         </view>
                                         <constraints>
                                             <constraint firstItem="F1J-h7-L9G" firstAttribute="centerX" secondItem="S7c-14-uEP" secondAttribute="centerX" id="Aix-J8-FO8"/>
-                                            <constraint firstItem="S7c-14-uEP" firstAttribute="top" secondItem="ct0-D4-8j2" secondAttribute="top" constant="10" id="P1t-vO-m5I"/>
+                                            <constraint firstItem="S7c-14-uEP" firstAttribute="top" relation="lessThanOrEqual" secondItem="ct0-D4-8j2" secondAttribute="top" constant="10" id="P1t-vO-m5I"/>
                                             <constraint firstAttribute="centerX" secondItem="F1J-h7-L9G" secondAttribute="centerX" id="XkC-yE-KJh"/>
                                             <constraint firstItem="F1J-h7-L9G" firstAttribute="centerY" secondItem="S7c-14-uEP" secondAttribute="centerY" id="hXv-M9-zgt"/>
                                         </constraints>
@@ -245,7 +252,6 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.84705889229999998" green="0.84705889229999998" blue="0.84705889229999998" alpha="1" colorSpace="deviceRGB"/>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
