@@ -153,9 +153,21 @@
                                             <rect key="frame" x="0.0" y="0.0" width="44" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="28" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F1J-h7-L9G">
-                                                    <rect key="frame" x="12" y="14" width="20" height="21"/>
+                                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SelectedCircleNormal" translatesAutoresizingMaskIntoConstraints="NO" id="S7c-14-uEP" userLabel="Selected Normal">
+                                                    <rect key="frame" x="7" y="10" width="30" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="QSd-GE-oiH"/>
+                                                        <constraint firstAttribute="width" constant="30" id="RXj-As-Plj"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="28" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F1J-h7-L9G">
+                                                    <rect key="frame" x="12" y="14" width="21" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="UHY-Hx-csS"/>
+                                                        <constraint firstAttribute="width" constant="21" id="VZj-2R-Te3"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -164,9 +176,13 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
+                                            <constraint firstItem="F1J-h7-L9G" firstAttribute="centerX" secondItem="S7c-14-uEP" secondAttribute="centerX" id="Aix-J8-FO8"/>
+                                            <constraint firstItem="S7c-14-uEP" firstAttribute="top" secondItem="ct0-D4-8j2" secondAttribute="top" constant="10" id="P1t-vO-m5I"/>
                                             <constraint firstAttribute="centerX" secondItem="F1J-h7-L9G" secondAttribute="centerX" id="XkC-yE-KJh"/>
+                                            <constraint firstItem="F1J-h7-L9G" firstAttribute="centerY" secondItem="S7c-14-uEP" secondAttribute="centerY" id="hXv-M9-zgt"/>
                                         </constraints>
                                         <connections>
+                                            <outlet property="SelectedCircleNormalView" destination="S7c-14-uEP" id="asJ-JE-2RD"/>
                                             <outlet property="dateLabel" destination="F1J-h7-L9G" id="DHO-oR-aZU"/>
                                         </connections>
                                     </collectionViewCell>
@@ -247,6 +263,9 @@
             <point key="canvasLocation" x="930" y="540"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="SelectedCircleNormal" width="30" height="30"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

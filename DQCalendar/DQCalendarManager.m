@@ -18,6 +18,7 @@
 @property (nonatomic) CGPoint currentOffset;
 @property (nonatomic) NSInteger currentSection;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (nonatomic, weak) CalendarTileCell *currentSelectedCell;
 
 @end
 
@@ -98,8 +99,6 @@
     } else {
         rowsNumber = 5;
     }
-    
-    NSLog(@"Number of %ld rows in section = %ld", rowsNumber, section);
     return rowsNumber;
 }
 
@@ -140,18 +139,22 @@
     
     cell.isToday = [date isToday];
     cell.isOffDay = [date weekDay] == 6 || [date weekDay] == 7;
+    cell.dateSelected = [date isEqualToDate:self.currentSelectedDate];
+    self.currentSelectedCell = cell.dateSelected ? cell : self.currentSelectedCell;
     
     return cell;
 }
 
-- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
+#pragma mark - UICollectionViewDelegate
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UICollectionReusableView *footer = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"footer" forIndexPath:indexPath];
-    footer.backgroundColor = [UIColor lightGrayColor];
-    return footer;
+    self.currentSelectedCell.dateSelected = NO;
+    self.currentSelectedCell = (CalendarTileCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    self.currentSelectedCell.dateSelected = YES;
+    self.currentSelectedDate = [self dateAtIndexPath:indexPath];
+    
 }
 
-#pragma mark - UICollectionViewDelegate
 - (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView
 {
     

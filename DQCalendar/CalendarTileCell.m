@@ -8,6 +8,13 @@
 
 #import "CalendarTileCell.h"
 
+@interface CalendarTileCell ()
+
+@property (weak, nonatomic) IBOutlet UIImageView *SelectedCircleNormalView;
+
+
+@end
+
 @implementation CalendarTileCell
 
 - (void)awakeFromNib
@@ -47,17 +54,42 @@
     [self reloadDateLabel];
 }
 
-- (void)reloadDateLabel
+- (void)setDateSelected:(BOOL)dateSelected
 {
-    if (self.isToday) {
-        self.dateLabel.textColor = [UIColor redColor];
-    } else if (self.isOffDay) {
-        self.dateLabel.textColor = [UIColor lightGrayColor];
+    _dateSelected = dateSelected;
+    
+    [self reloadSelected];
+}
+
+- (void)reloadSelected
+{
+    NSString *imageName = self.isToday ? @"SelectedCircleToday" : @"SelectedCircleNormal";
+    self.SelectedCircleNormalView.image = [UIImage imageNamed:imageName];
+    
+    if (self.dateSelected) {
+        self.SelectedCircleNormalView.hidden = NO;
+        self.dateLabel.textColor = [UIColor whiteColor];
+        self.dateLabel.font = [UIFont boldSystemFontOfSize:18];
     } else {
-        self.dateLabel.textColor = [UIColor blackColor];
+        self.SelectedCircleNormalView.hidden = YES;
+        self.dateLabel.font = [UIFont systemFontOfSize:17];
+        [self reloadDateLabel];
     }
 }
 
+- (void)reloadDateLabel
+{
+    if (self.isToday) {
+        self.dateLabel.font = [UIFont boldSystemFontOfSize:17];
+        self.dateLabel.textColor = [UIColor redColor];
+    } else if (self.isOffDay) {
+        self.dateLabel.font = [UIFont systemFontOfSize:17];
+        self.dateLabel.textColor = [UIColor lightGrayColor];
+    } else {
+        self.dateLabel.font = [UIFont systemFontOfSize:17];
+        self.dateLabel.textColor = [UIColor blackColor];
+    }
+}
 
 - (void)drawRect:(CGRect)rect
 {

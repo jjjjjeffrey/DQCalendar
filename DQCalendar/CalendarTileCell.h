@@ -12,5 +12,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (nonatomic) BOOL isToday;
 @property (nonatomic) BOOL isOffDay;
+@property (nonatomic) BOOL dateSelected;
 
 @end
