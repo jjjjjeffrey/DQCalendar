@@ -14,9 +14,11 @@
 
 @interface RootViewController ()
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *CalendarHeightConstraint;
-@property (nonatomic) NSInteger lastSectionOfPage;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *calendarTopAlignmentConstraint;
+@property (nonatomic) CGFloat lastCalendarHeightConstraint;
 @property (nonatomic, weak) CalendarViewController *calendarVC;
-@property (nonatomic) NSInteger currentMonth;
+@property (nonatomic) BOOL calendarHidden;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *todayBarButton;
 
 @end
 
@@ -47,8 +49,7 @@
 
 - (void)performAnimation
 {
-    
-    id toValue = 0;
+    id toValue = @(0);
     if (self.calendarVC.calendarManager.rowOfPage == 4) {
         toValue = @(260);
     } else if (self.calendarVC.calendarManager.rowOfPage == 5) {
@@ -57,6 +58,8 @@
         toValue = @(380);
     }
     
+    self.lastCalendarHeightConstraint = [toValue floatValue];
+    
     POPBasicAnimation *animation = [POPBasicAnimation animationWithPropertyNamed:kPOPLayoutConstraintConstant];
     animation.toValue = toValue;
     animation.duration = 0.3;
@@ -64,17 +67,54 @@
     [self.CalendarHeightConstraint pop_addAnimation:animation forKey:nil];
 }
 
+- (void)hideCalendar
+{
+    POPBasicAnimation *animation = [POPBasicAnimation animationWithPropertyNamed:kPOPLayoutConstraintConstant];
+    animation.toValue = @(-self.lastCalendarHeightConstraint+64);
+    animation.duration = 0.3;
+    [self.calendarTopAlignmentConstraint pop_addAnimation:animation forKey:nil];
+}
+
+- (void)showCalendar
+{
+    POPSpringAnimation *animation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayoutConstraintConstant];
+    animation.toValue = @(64);
+    animation.springBounciness = 12;
+    animation.springSpeed = 15;
+    [self.calendarTopAlignmentConstraint pop_addAnimation:animation forKey:nil];
+}
+
 - (IBAction)todayButtonClicked:(id)sender
 {
     [self.calendarVC.calendarManager scrollToDate:[NSDate date] animated:YES];
 }
 
+- (IBAction)changeCalendarShow:(UIBarButtonItem *)sender
+{
+    if (self.calendarHidden) {
+        sender.title = @"收起日历";
+        [self showCalendar];
+    } else {
+        sender.title = @"展示日历";
+        [self hideCalendar];
+    }
+    self.calendarHidden = !self.calendarHidden;
+}
+
+- (void)setCalendarHidden:(BOOL)calendarHidden
+{
+    _calendarHidden = calendarHidden;
+    
+    self.todayBarButton.enabled = !calendarHidden;
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    self.lastSectionOfPage = 5;
+    self.calendarHidden = NO;
+    
+    self.lastCalendarHeightConstraint = self.CalendarHeightConstraint.constant;
 
     self.calendarVC = (CalendarViewController *)self.childViewControllers[0];
     
@@ -88,7 +128,6 @@
     components.day = 1;
     NSDate *toDate = [[NSDate gregorianCalendar] dateFromComponents:components];
     
-    self.currentMonth = [fromDate monthComponents];
     self.calendarVC.calendarManager.beginDate = fromDate;
     self.calendarVC.calendarManager.endDate = toDate;
     [self.calendarVC.calendarManager addObserver:self forKeyPath:@"rowOfPage" options:NSKeyValueObservingOptionNew context:nil];
