@@ -86,7 +86,7 @@
 
 - (IBAction)todayButtonClicked:(id)sender
 {
-    [self.calendarVC.calendarManager scrollToDate:[NSDate date] animated:YES];
+    [self.calendarVC.calendarManager selectDate:[NSDate date] animated:YES];
 }
 
 - (IBAction)changeCalendarShow:(UIBarButtonItem *)sender
@@ -123,7 +123,7 @@
     components.day = 1;
     components.year = 2014;
     NSDate *fromDate = [[NSDate gregorianCalendar] dateFromComponents:components];
-    components.year = 2015;
+    components.year = 2020;
     components.month = 12;
     components.day = 1;
     NSDate *toDate = [[NSDate gregorianCalendar] dateFromComponents:components];

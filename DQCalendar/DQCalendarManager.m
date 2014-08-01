@@ -132,26 +132,34 @@
     }
     
     NSDateComponents *components = [[NSDate gregorianCalendar] components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:toDate];
-    NSDate *clearDate = [[NSDate gregorianCalendar] dateFromComponents:components];
+    components.day = 1;
+    NSDate *firstDate = [[NSDate gregorianCalendar] dateFromComponents:components];
     
-    NSIndexPath *indexPath = [self indexPathForDate:clearDate];
+    NSIndexPath *indexPath = [self indexPathForDate:firstDate];
     
+    self.currentSection = indexPath.section;
+    self.currentMonthDate = firstDate;
+    self.currentOffset = [self contentOffsetForSection:indexPath.section];
+    self.rowOfPage = [self numberOfRowsInSection:self.currentSection];
+    [self reloadNumberOfRowsData];
+    
+    NSIndexPath *scrollToIndexPath = [NSIndexPath indexPathForItem:0 inSection:indexPath.section];
+    [self.collectionView scrollToItemAtIndexPath:scrollToIndexPath atScrollPosition:UICollectionViewScrollPositionTop animated:animated];
+}
+
+- (void)selectDate:(NSDate *)selectDate animated:(BOOL)animated
+{
+    NSDateComponents *components = [[NSDate gregorianCalendar] components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:selectDate];
+    self.currentSelectedDate = [[NSDate gregorianCalendar] dateFromComponents:components];
+    NSIndexPath *indexPath = [self indexPathForDate:selectDate];
     if (self.currentSection == indexPath.section) {
         self.currentSelectedCell.dateSelected = NO;
         CalendarTileCell *cell = (CalendarTileCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
         cell.dateSelected = YES;
         self.currentSelectedCell = cell;
-    } else {
-        self.currentSection = indexPath.section;
-        self.currentMonthDate = clearDate;
-        self.currentSelectedDate = clearDate;
-        self.currentOffset = [self contentOffsetForSection:indexPath.section];
-        self.rowOfPage = [self numberOfRowsInSection:self.currentSection];
-        [self reloadNumberOfRowsData];
-        
-        NSIndexPath *scrollToIndexPath = [NSIndexPath indexPathForItem:0 inSection:indexPath.section];
-        [self.collectionView scrollToItemAtIndexPath:scrollToIndexPath atScrollPosition:UICollectionViewScrollPositionTop animated:animated];
     }
+    [self scrollToDate:selectDate animated:animated];
+    
 }
 
 - (CGPoint)contentOffsetForSection:(NSInteger)section
@@ -221,9 +229,9 @@
         
     } else if (velocity.y == 0) {
         if (targetContentOffset->y > self.currentOffset.y) {
-            [self scrollToNextMonthWithTargetContentOffset:targetContentOffset];
+            [self scrollToNextMonth];
         } else if (targetContentOffset->y < self.currentOffset.y) {
-            [self scrollToLastMonthWithTargetContentOffset:targetContentOffset];
+            [self scrollToLastMonth];
         }
     }
     
@@ -234,12 +242,12 @@
 {
     *targetContentOffset = CGPointMake(targetContentOffset->x, self.currentOffset.y+self.numberOfRowsInCurrentSection*60);
     
-    NSDateComponents *offsetComponents = [[NSDateComponents alloc] init];
-    offsetComponents.month = 1;
+    NSDateComponents *dateComponentsWillScrollTO = [[NSDate gregorianCalendar] components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:self.currentMonthDate];
+    dateComponentsWillScrollTO.month = dateComponentsWillScrollTO.month+1;
     if ([self.currentMonthDate compare:self.endDate] == NSOrderedAscending) {
         self.currentOffset = CGPointMake(targetContentOffset->x, targetContentOffset->y);
-        
-        self.currentMonthDate = [[NSDate gregorianCalendar] dateByAddingComponents:offsetComponents toDate:self.currentMonthDate options:0];
+
+        self.currentMonthDate = [[NSDate gregorianCalendar] dateFromComponents:dateComponentsWillScrollTO];
         self.rowOfPage = [self numberOfRowsInSection:self.currentSection+1];
         self.currentSection += 1;
         
@@ -259,13 +267,33 @@
     if ([self.currentMonthDate compare:self.beginDate] == NSOrderedDescending) {
         self.currentOffset = CGPointMake(targetContentOffset->x, targetContentOffset->y);
         
-        NSDateComponents *offsetComponents = [[NSDateComponents alloc] init];
-        offsetComponents.month = -1;
-        self.currentMonthDate = [[NSDate gregorianCalendar] dateByAddingComponents:offsetComponents toDate:self.currentMonthDate options:0];
+        NSDateComponents *dateComponentsWillScrollTO = [[NSDate gregorianCalendar] components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:self.currentMonthDate];
+        dateComponentsWillScrollTO.month = dateComponentsWillScrollTO.month-1;
+        self.currentMonthDate = [[NSDate gregorianCalendar] dateFromComponents:dateComponentsWillScrollTO];
         self.rowOfPage = [self numberOfRowsInSection:self.currentSection-1];
         self.currentSection -= 1;
         
         [self reloadNumberOfRowsData];
+    }
+}
+
+- (void)scrollToNextMonth
+{
+    NSDateComponents *dateComponentsWillScrollTO = [[NSDate gregorianCalendar] components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:self.currentMonthDate];
+    dateComponentsWillScrollTO.month = dateComponentsWillScrollTO.month+1;
+    if ([self.currentMonthDate compare:self.endDate] == NSOrderedAscending) {
+        self.currentMonthDate = [[NSDate gregorianCalendar] dateFromComponents:dateComponentsWillScrollTO];
+        [self scrollToDate:self.currentMonthDate animated:YES];
+    }
+}
+
+- (void)scrollToLastMonth
+{
+    NSDateComponents *dateComponentsWillScrollTO = [[NSDate gregorianCalendar] components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:self.currentMonthDate];
+    dateComponentsWillScrollTO.month = dateComponentsWillScrollTO.month-1;
+    if ([self.currentMonthDate compare:self.beginDate] == NSOrderedDescending) {
+        self.currentMonthDate = [[NSDate gregorianCalendar] dateFromComponents:dateComponentsWillScrollTO];
+        [self scrollToDate:self.currentMonthDate animated:YES];
     }
 }
 
