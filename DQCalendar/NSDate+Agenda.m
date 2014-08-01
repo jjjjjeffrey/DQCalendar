@@ -206,4 +206,11 @@ const char * const JmoLocaleStoreKey = "jmo.locale";
     return YES;
 }
 
+- (NSString *)DEC_YMD
+{
+    NSDateFormatter *formatter = [NSDateFormatter new];
+    formatter.dateFormat = @"yyyy-MM-dd";
+    return [formatter stringFromDate:self];
+}
+
 @end

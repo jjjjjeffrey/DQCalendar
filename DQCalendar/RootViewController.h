@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DQCalendarDelegate.h"
 
 @interface RootViewController : UIViewController
+    <DQCalendarDelegate>
 
 @end

@@ -133,9 +133,22 @@
     [self.calendarVC.calendarManager addObserver:self forKeyPath:@"rowOfPage" options:NSKeyValueObservingOptionNew context:nil];
     [self.calendarVC.calendarManager addObserver:self forKeyPath:@"currentMonthDate" options:NSKeyValueObservingOptionNew context:nil];
     
+    self.calendarVC.calendarManager.delegate = self;
+    
     NSInteger year = [self.calendarVC.calendarManager.currentMonthDate yearComponents];
     NSInteger month = [self.calendarVC.calendarManager.currentMonthDate monthComponents];
     self.title = [NSString stringWithFormat:@"%ld年%ld月", year, month];
+}
+
+#pragma mark - DQCalendarDelegate
+- (void)calendar:(DQCalendarManager *)calendar didSelectDate:(NSDate *)date
+{
+    NSLog(@"Did select date: %@", [date DEC_YMD]);
+}
+
+- (void)calendar:(DQCalendarManager *)calendar didScrollToDate:(NSDate *)date
+{
+    NSLog(@"Did scroll to date: %@", [date DEC_YMD]);
 }
 
 #pragma mark - POPAnimationDelegate

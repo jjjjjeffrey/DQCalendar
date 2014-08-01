@@ -70,6 +70,7 @@
 		7B9EB48919861EF400281CA2 /* DQCalendarManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DQCalendarManager.m; sourceTree = "<group>"; };
 		7B9EB48E1986487400281CA2 /* NSDate+Agenda.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Agenda.h"; sourceTree = "<group>"; };
 		7B9EB48F1986487400281CA2 /* NSDate+Agenda.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Agenda.m"; sourceTree = "<group>"; };
+		7BA6A53A198B24810000251F /* DQCalendarDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DQCalendarDelegate.h; sourceTree = "<group>"; };
 		CA6BF285E23E46BA92A32F2B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -142,6 +143,7 @@
 				7B9EB47D198220D700281CA2 /* CalendarViewController.m */,
 				7B9EB48819861EF400281CA2 /* DQCalendarManager.h */,
 				7B9EB48919861EF400281CA2 /* DQCalendarManager.m */,
+				7BA6A53A198B24810000251F /* DQCalendarDelegate.h */,
 				7B9EB47F198220E900281CA2 /* TableViewController.h */,
 				7B9EB480198220E900281CA2 /* TableViewController.m */,
 				7B9EB482198236E600281CA2 /* CalendarTileCell.h */,

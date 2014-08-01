@@ -36,4 +36,6 @@
 
 - (BOOL)betweenDate:(NSDate *)beginDate andDate:(NSDate *)endDate;
 
+- (NSString *)DEC_YMD;
+
 @end
