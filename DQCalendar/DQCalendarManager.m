@@ -145,21 +145,30 @@
     
     NSIndexPath *scrollToIndexPath = [NSIndexPath indexPathForItem:0 inSection:indexPath.section];
     [self.collectionView scrollToItemAtIndexPath:scrollToIndexPath atScrollPosition:UICollectionViewScrollPositionTop animated:animated];
+    
+    if ([_delegate respondsToSelector:@selector(calendar:didScrollToDate:)]) {
+        [_delegate calendar:self didScrollToDate:firstDate];
+    }
 }
 
 - (void)selectDate:(NSDate *)selectDate animated:(BOOL)animated
 {
     NSDateComponents *components = [[NSDate gregorianCalendar] components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:selectDate];
     self.currentSelectedDate = [[NSDate gregorianCalendar] dateFromComponents:components];
+    
+    if ([_delegate respondsToSelector:@selector(calendar:didSelectDate:)]) {
+        [_delegate calendar:self didSelectDate:self.currentSelectedDate];
+    }
+    
     NSIndexPath *indexPath = [self indexPathForDate:selectDate];
     if (self.currentSection == indexPath.section) {
         self.currentSelectedCell.dateSelected = NO;
         CalendarTileCell *cell = (CalendarTileCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
         cell.dateSelected = YES;
         self.currentSelectedCell = cell;
+    } else {
+        [self scrollToDate:selectDate animated:animated];
     }
-    [self scrollToDate:selectDate animated:animated];
-    
 }
 
 - (CGPoint)contentOffsetForSection:(NSInteger)section
@@ -212,10 +221,8 @@
 #pragma mark - UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    self.currentSelectedCell.dateSelected = NO;
-    self.currentSelectedCell = (CalendarTileCell *)[collectionView cellForItemAtIndexPath:indexPath];
-    self.currentSelectedCell.dateSelected = YES;
-    self.currentSelectedDate = [self dateAtIndexPath:indexPath];
+    NSDate *selectDate = [self dateAtIndexPath:indexPath];
+    [self selectDate:selectDate animated:YES];
     
 }
 
@@ -252,6 +259,10 @@
         self.currentSection += 1;
         
         [self reloadNumberOfRowsData];
+        
+        if ([_delegate respondsToSelector:@selector(calendar:didScrollToDate:)]) {
+            [_delegate calendar:self didScrollToDate:self.currentMonthDate];
+        }
     }
 }
 
@@ -274,6 +285,10 @@
         self.currentSection -= 1;
         
         [self reloadNumberOfRowsData];
+        
+        if ([_delegate respondsToSelector:@selector(calendar:didScrollToDate:)]) {
+            [_delegate calendar:self didScrollToDate:self.currentMonthDate];
+        }
     }
 }
 

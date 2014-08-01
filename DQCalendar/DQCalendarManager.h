@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DQCalendarDelegate.h"
 
 @interface DQCalendarManager : NSObject
 
@@ -16,6 +17,8 @@
 @property (nonatomic) NSInteger totalMonths;
 @property (nonatomic, strong) NSDate *currentMonthDate;
 @property (nonatomic, strong) NSDate *currentSelectedDate;
+
+@property (nonatomic, assign) id <DQCalendarDelegate> delegate;
 
 - (void)scrollToDate:(NSDate *)toDate animated:(BOOL)animated;
 
