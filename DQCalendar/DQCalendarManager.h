@@ -19,4 +19,6 @@
 
 - (void)scrollToDate:(NSDate *)toDate animated:(BOOL)animated;
 
+- (void)selectDate:(NSDate *)selectDate animated:(BOOL)animated;
+
 @end

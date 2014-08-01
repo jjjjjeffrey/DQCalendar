@@ -42,7 +42,7 @@
 {
     [super viewDidAppear:animated];
     
-    [self.calendarManager scrollToDate:[NSDate date] animated:NO];
+    [self.calendarManager selectDate:[NSDate date] animated:NO];
 }
 
 - (void)didReceiveMemoryWarning
